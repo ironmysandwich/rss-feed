@@ -1,0 +1,21 @@
+#rss-feeds {
+	padding: 10px;
+	background-color: #EFEFEF;
+}
+
+ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+li {
+	padding: 10px;
+	border-top: 1px solid #AAA;
+}
+li:first-child {
+	border-top: none;
+}
+
+.hidden {
+	display:none;
+}

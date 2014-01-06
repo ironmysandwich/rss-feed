@@ -1,34 +1,46 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.0.min.css" />
-        <title>Feed Reader</title>
-		<script src="js/jquery-2.0.3.min.js"></script>
-		<script src="js/jquery.mobile-1.4.0.min.js"></script>
-		<script src="cordova.js"></script>
-		<script src="js/feed.js"></script>
-		<script src="js/application.js"></script>
-		<script>
-			$(document)
-				.on('pagebeforecreate', Application.updateIcons)
-				.one('deviceready', Application.initApplication)
-		</script>
-    </head>
-    <body>
-        <div data-role="page">
-            <header data-role="header" data-back-btn="true">
-				<h1>Tutorial Feed Reader</h1>
-			</header>
-			<div data-role="content">
-				<p>Feed Reader is a very basic feed aggregator.</p>
-				<a href="add-feed.html" data-role="button">Add Feed</a>
-				<a href="list-feeds.html" data-role="button">List Feed</a>
-			</div>
-			<footer data-role="footer" data-position="fixed">
-				<h2>Created by Me</h2>
-			</footer>
-        </div>
-    </body>
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">	
+	<title>RSS Feed</title> 
+	<link rel="stylesheet" href="css/jquery.mobile-1.4.0.min.css" />
+	<link rel="stylesheet" href="css/feed.css" />
+	<script src="js/jquery-2.0.3.min.js"></script>
+	<script src="js/jquery.mobile-1.4.0.min.js"></script>
+	<script src="js/jquery.rss.min.js"></script>
+	<script type="text/javascript">
+		jQuery(function($) {
+			$("#rss-feeds").rss("http://feeds.popsci.com/c/34567/f/632419/index.rss", {
+				limit: 5,
+				layoutTemplate: '<ul>{entries}</ul>',
+				entryTemplate: '<li><a href="{url}">{title}</a><br />{shortBodyPlain}<br /><button onclick="show({index})">View</button><div id="{index}" class="hidden">{body}<button onclick="show({index})">Less</button></div></li>'
+			})
+		  })
+		function show(index){
+			var element = document.getElementById(index);
+			if (element.className == "") {
+				element.className = "hidden";
+			} else {
+				element.className = "";
+			}
+		}
+	</script>
+</head> 
+<body>
+	<div data-role="page" id="mainPage">
+		
+		<div data-role="header">
+			<h1>Most Recent VERT Alerts</h1>
+		</div>
+		
+		<div data-role="content">	
+			<div id="rss-feeds"></div>
+		</div>
+		
+		
+		<div data-role="footer">
+			<h4>Footer</h4>
+		</div>	
+	</div>
+</body>
 </html>
